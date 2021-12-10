@@ -7,7 +7,7 @@ from people_parser import PeopleParser
 
 port = 587
 smtp_server = "smtp.gmail.com"
-sender_email = "amadeuszmichalak@gmail.com"
+sender_email = input("Type your email address and press enter:")
 password = input("Type your password and press enter:")
 
 parser = PeopleParser('peopleList.csv')
@@ -33,6 +33,6 @@ with smtplib.SMTP(smtp_server, port) as server:
     server.login(sender_email, password)
     for ind, personNotified in enumerate(people):
         receiver_email = personNotified.email
-        message = 'Hej {}. Wylosowales {} jako osobe, ktorej musisz kupic prezent. \nLimit - 100zl\nPowodzenia'\
+        message = 'Hey {}. You have {} for secret santa. \nLimit - 100$\nPowodzenia'\
             .format(personNotified.name, people_basket[ind].name)
         server.sendmail(sender_email, receiver_email, message)
