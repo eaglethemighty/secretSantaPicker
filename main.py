@@ -27,11 +27,12 @@ while isPeopleConflict:
 
 context = ssl.create_default_context()
 with smtplib.SMTP(smtp_server, port) as server:
-    server.ehlo()  # Can be omitted
+    server.ehlo()
     server.starttls(context=context)
-    server.ehlo()  # Can be omitted
+    server.ehlo()
     server.login(sender_email, password)
     for ind, personNotified in enumerate(people):
         receiver_email = personNotified.email
-        message = 'Hej {}. Wylosowales {} jako osobe, ktorej musisz kupic prezent. \nLimit - 100zl\nPowodzenia'.format(personNotified.name, people_basket[ind].name)
+        message = 'Hej {}. Wylosowales {} jako osobe, ktorej musisz kupic prezent. \nLimit - 100zl\nPowodzenia'\
+            .format(personNotified.name, people_basket[ind].name)
         server.sendmail(sender_email, receiver_email, message)
